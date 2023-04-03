@@ -1,0 +1,26 @@
+services:
+  # redis:
+  #   container_name: redis
+  #   image: 'redis:7.0.8-alpine'
+  #   environment:
+  #     - ALLOW_EMPTY_PASSWORD=yes
+  #   volumes:
+  #     - ./tmp/redis:/bitnami/redis/data
+
+  # web:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/usr/src/app
+  #   command: bundle exec rails s -b 0.0.0.0
+
+  postgres:
+    container_name: postgres
+    image: 'postgres:15.2-alpine'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+
