@@ -9,5 +9,7 @@ migrateup:
 	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DATABASE}?sslmode=${SSL_MODE}" -verbose up
 migratedown:
 	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DATABASE}?sslmode=${SSL_MODE}" -verbose down
+sqlc:
+	sqlc generate
 
-.PHONY: createdb dropdb migrateup migratedown
+.PHONY: createdb dropdb migrateup migratedown sqlc
