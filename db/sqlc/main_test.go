@@ -14,6 +14,7 @@ import (
 )
 
 var testQueries *Queries
+var testDB *sql.DB
 
 func TestMain(m *testing.M) {
 	envErr := godotenv.Load(projectpath.Root + "/.env")
@@ -30,12 +31,13 @@ func TestMain(m *testing.M) {
 
 	dbDriver := "postgres"
 	dbSource := "postgresql://" + user + ":" + password + "@localhost:" + port + "/" + database + "?sslmode=" + sslMode
+	var err error
 
-	conn, err := sql.Open(dbDriver, dbSource)
+	testDB, err = sql.Open(dbDriver, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to database: ", err)
 	}
-	testQueries = New(conn)
+	testQueries = New(testDB)
 	os.Exit(m.Run())
 
 }
