@@ -53,7 +53,12 @@ jobs:
 
     - name: Run migrations
       run: make migrateup
+      env:
+        POSTGRES_PASSWORD: secret
+        POSTGRES_USER: root
+        POSTGRES_DATABASE: simple_bank
+        POSTGRES_PORT: 5432
+        SSL_MODE: disable
 
     - name: Test
       run: make test
-
