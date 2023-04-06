@@ -67,4 +67,8 @@ jobs:
         echo POSTGRES_DB="simple_bank" >> .env
         echo POSTGRES_PORT="5432" >> .env
         echo SSL_MODE="disable" >> .env
+        echo DB_DRIVER="postgres" >> .env
+        echo DB_SOURCE="postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" >> .env
+        echo SERVER_ADDRESS="0.0.0.0:8081" >> .env
+
         make test
