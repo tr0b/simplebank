@@ -11,5 +11,7 @@ migratedown:
 	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose down
 sqlc:
 	sqlc generate
+test:
+	go test -v -cover ./...
 
-.PHONY: createdb dropdb migrateup migratedown sqlc
+.PHONY: createdb dropdb migrateup migratedown sqlc test
