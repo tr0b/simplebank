@@ -27,7 +27,7 @@ func TestMain(m *testing.M) {
 	password := os.Getenv("POSTGRES_PASSWORD")
 	port := os.Getenv("POSTGRES_PORT")
 	sslMode := os.Getenv("SSL_MODE")
-	database := os.Getenv("POSTGRES_DATABASE")
+	database := os.Getenv("POSTGRES_DB")
 
 	dbDriver := "postgres"
 	dbSource := "postgresql://" + user + ":" + password + "@localhost:" + port + "/" + database + "?sslmode=" + sslMode
