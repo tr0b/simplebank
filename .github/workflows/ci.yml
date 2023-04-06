@@ -35,6 +35,10 @@ jobs:
 
     steps:
 
+    - name: Add dummy .env values
+      run: |
+        echo > "POSTGRES_PASSWORD=secret POSTGRES_USER=root POSTGRES_DB=simple_bank POSTGRES_PORT=5432 SSL_MODE=disable" .env
+
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
 
