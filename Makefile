@@ -1,4 +1,4 @@
-include .env
+-include .env
 
 createdb:
 	docker-compose exec postgres createdb --username=${POSTGRES_USER} --owner=${POSTGRES_USER} ${POSTGRES_DATABASE}
