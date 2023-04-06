@@ -34,9 +34,6 @@ jobs:
           - 5432:5432
 
     steps:
-    - name: Create dummy .env
-      run: echo POSTGRES_PASSWORD=secret\\n POSTGRES_USER=root\\n POSTGRES_DB=simple_bank\\n POSTGRES_PORT=5432\\n SSL_MODE=disable\\n > .env
-
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
@@ -64,4 +61,10 @@ jobs:
         SSL_MODE: disable
 
     - name: Test
-      run: make test
+      run: |
+        echo POSTGRES_PASSWORD="secret" > .env
+        echo POSTGRES_USER="root" >> .env
+        echo POSTGRES_DB="simple_bank" >> .env
+        echo POSTGRES_PORT="5432" >> .env
+        echo SSL_MODE="disable" >> .env
+        make test
