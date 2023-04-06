@@ -6,34 +6,22 @@ import (
 	"os"
 	"testing"
 
-	"github.com/joho/godotenv"
-
 	_ "github.com/lib/pq"
 
-	"github.com/tr0b/simplebank/internal/projectpath"
+	"github.com/tr0b/simplebank/util"
 )
 
 var testQueries *Queries
 var testDB *sql.DB
 
 func TestMain(m *testing.M) {
-	envErr := godotenv.Load(projectpath.Root + "/.env")
-	path, _ := os.Getwd()
-	log.Println(path)
-	if envErr != nil {
-		log.Fatal("Error loading environment variables file:", envErr)
+	config, err := util.LoadConfig("../..")
+
+	if err != nil {
+		log.Fatal("Cannot access config file:", err)
 	}
-	user := os.Getenv("POSTGRES_USER")
-	password := os.Getenv("POSTGRES_PASSWORD")
-	port := os.Getenv("POSTGRES_PORT")
-	sslMode := os.Getenv("SSL_MODE")
-	database := os.Getenv("POSTGRES_DB")
 
-	dbDriver := "postgres"
-	dbSource := "postgresql://" + user + ":" + password + "@localhost:" + port + "/" + database + "?sslmode=" + sslMode
-	var err error
-
-	testDB, err = sql.Open(dbDriver, dbSource)
+	testDB, err = sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to database: ", err)
 	}
