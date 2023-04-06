@@ -5,6 +5,10 @@ createdb:
 
 dropdb:
 	docker-compose exec postgres dropdb ${POSTGRES_DB}
+migrateup1:
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose up 1
+migratedown1:
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose down 1
 migrateup:
 	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose up
 migratedown:
@@ -20,4 +24,4 @@ server:
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/tr0b/simplebank/db/sqlc Store
 
-.PHONY: createdb dropdb migrateup migratedown sqlc test server mock
+.PHONY: createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock
