@@ -6,22 +6,32 @@ import (
 	db "github.com/tr0b/simplebank/db/sqlc"
 )
 
-func GenerateCreateAccountParams() (db.CreateAccountParams, error) {
-	p := db.CreateAccountParams{}
-	err := faker.FakeData(&p)
+func GenerateAccount() (db.Account, error) {
+	a := db.Account{}
+	err := faker.FakeData(&a)
 	if err != nil {
-		return p, err
+		return a, err
 	}
 
-	return p, nil
+	return a, nil
 }
 
-func GenerateCreateEntryParams() (db.CreateEntryParams, error) {
-	p := db.CreateEntryParams{}
-	err := faker.FakeData(&p)
-	if err != nil {
-		return p, err
-	}
+// func GenerateCreateAccountParams() (db.CreateAccountParams, error) {
+// 	p := db.CreateAccountParams{}
+// 	err := faker.FakeData(&p)
+// 	if err != nil {
+// 		return p, err
+// 	}
+//
+// 	return p, nil
+// }
 
-	return p, nil
-}
+// func GenerateCreateEntryParams() (db.CreateEntryParams, error) {
+// 	p := db.CreateEntryParams{}
+// 	err := faker.FakeData(&p)
+// 	if err != nil {
+// 		return p, err
+// 	}
+//
+// 	return p, nil
+// }

@@ -9,6 +9,15 @@ sql:
         out: "db/sqlc"
         emit_json_tags: true
         emit_prepared_queries: false
-        emit_interface: false
+        emit_interface: true
         emit_exact_table_names: false
         emit_empty_slices: true
+        overrides:
+          - column: accounts.id
+            go_struct_tag: faker:"oneof:1,2"
+          - column: accounts.owner
+            go_struct_tag: faker:"first_name"
+          - column: accounts.balance
+            go_struct_tag: faker:"unix_time"
+          - column: accounts.currency
+            go_struct_tag: faker:"currency"

@@ -9,10 +9,10 @@ import (
 )
 
 type Account struct {
-	ID        int64     `json:"id"`
-	Owner     string    `json:"owner"`
-	Balance   int64     `json:"balance"`
-	Currency  string    `json:"currency"`
+	ID        int64     `faker:"oneof:1,2" json:"id"`
+	Owner     string    `faker:"first_name" json:"owner"`
+	Balance   int64     `faker:"unix_time" json:"balance"`
+	Currency  string    `faker:"currency" json:"currency"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
