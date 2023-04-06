@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:15-2
+        image: postgres:15.2
         env:
           POSTGRES_PASSWORD: secret
           POSTGRES_USER: root
