@@ -13,6 +13,7 @@ sql:
         emit_exact_table_names: false
         emit_empty_slices: true
         overrides:
+          # Custom Account table tags
           - column: accounts.id
             go_struct_tag: faker:"oneof:1,2"
           - column: accounts.owner
@@ -21,3 +22,12 @@ sql:
             go_struct_tag: faker:"unix_time"
           - column: accounts.currency
             go_struct_tag: faker:"currency"
+          # Custom User table tags
+          - column: users.username
+            go_struct_tag: faker:"username"
+          - column: users.hashed_password
+            go_struct_tag: faker:"password"
+          - column: users.email
+            go_struct_tag: faker:"email"
+          - column: users.full_name
+            go_struct_tag: faker:"name"

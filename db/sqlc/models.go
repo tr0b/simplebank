@@ -34,10 +34,10 @@ type Transfer struct {
 }
 
 type User struct {
-	Username          string    `json:"username"`
-	HashedPassword    string    `json:"hashed_password"`
-	FullName          string    `json:"full_name"`
-	Email             string    `json:"email"`
+	Username          string    `faker:"username" json:"username"`
+	HashedPassword    string    `faker:"password,len=6" json:"hashed_password"`
+	FullName          string    `faker:"name" json:"full_name"`
+	Email             string    `faker:"email" json:"email"`
 	PasswordChangedAt time.Time `json:"password_changed_at"`
 	CreatedAt         time.Time `json:"created_at"`
 }

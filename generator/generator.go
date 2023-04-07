@@ -16,6 +16,16 @@ func GenerateAccount() (db.Account, error) {
 	return a, nil
 }
 
+func GenerateUser() (db.User, error) {
+	u := db.User{}
+	err := faker.FakeData(&u)
+	if err != nil {
+		return u, err
+	}
+
+	return u, nil
+}
+
 // func GenerateCreateAccountParams() (db.CreateAccountParams, error) {
 // 	p := db.CreateAccountParams{}
 // 	err := faker.FakeData(&p)
