@@ -11,8 +11,9 @@ import (
 )
 
 func createRandomAccount(t *testing.T) Account {
+	user := createRandomUser(t)
 	arg := CreateAccountParams{
-		Owner:    faker.FirstName(),
+		Owner:    user.Username,
 		Balance:  faker.UnixTime(),
 		Currency: faker.Currency(),
 	}
