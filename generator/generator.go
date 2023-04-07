@@ -2,9 +2,14 @@ package generator
 
 import (
 	"github.com/go-faker/faker/v4"
+	"github.com/go-faker/faker/v4/pkg/options"
 
 	db "github.com/tr0b/simplebank/db/sqlc"
 )
+
+type Secret struct {
+	Phrase string
+}
 
 func GenerateAccount() (db.Account, error) {
 	a := db.Account{}
@@ -24,6 +29,17 @@ func GenerateUser() (db.User, error) {
 	}
 
 	return u, nil
+}
+
+func GenerateSecret() (Secret, error) {
+	s := Secret{}
+	err := faker.FakeData(&s, options.WithRandomStringLength(32))
+
+	if err != nil {
+		return s, err
+	}
+
+	return s, nil
 }
 
 // func GenerateCreateAccountParams() (db.CreateAccountParams, error) {
