@@ -11,10 +11,11 @@ type Secret struct {
 	Phrase string
 }
 
-func GenerateAccount(currency string) (db.Account, error) {
+func GenerateAccount(currency string, owner string) (db.Account, error) {
 	a := db.Account{}
 	err := faker.FakeData(&a)
 	a.Currency = currency
+	a.Owner = owner
 	if err != nil {
 		return a, err
 	}
