@@ -208,7 +208,7 @@ func TestCreateUserAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start server and send the request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// Marshal body data to JSON
@@ -249,6 +249,5 @@ func requireBodyMatchUser(t *testing.T, body *bytes.Buffer, user db.User) {
 		Email:          gotUser.Email,
 		FullName:       gotUser.FullName,
 	}
-	require.Equal(t, userComparison, resUserComparison)
 	require.Equal(t, userComparison, resUserComparison)
 }

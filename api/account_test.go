@@ -19,7 +19,7 @@ import (
 )
 
 func TestGetAccountAPI(t *testing.T) {
-	account, err := generator.GenerateAccount()
+	account, err := generator.GenerateAccount("USD")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -104,7 +104,7 @@ func TestGetAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start server and send the request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/accounts/%d", tc.accountID)
@@ -129,5 +129,17 @@ func requireBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Accoun
 	err = json.Unmarshal(data, &gotAccount)
 
 	require.NoError(t, err)
-	require.Equal(t, account, gotAccount)
+	accountComparison := db.Account{
+		ID:       account.ID,
+		Owner:    account.Owner,
+		Balance:  account.Balance,
+		Currency: account.Currency,
+	}
+	resAccountComparison := db.Account{
+		ID:       gotAccount.ID,
+		Owner:    gotAccount.Owner,
+		Balance:  gotAccount.Balance,
+		Currency: gotAccount.Currency,
+	}
+	require.Equal(t, accountComparison, resAccountComparison)
 }

@@ -11,7 +11,7 @@ import (
 type Account struct {
 	ID        int64     `faker:"oneof:1,2" json:"id"`
 	Owner     string    `faker:"first_name" json:"owner"`
-	Balance   int64     `faker:"unix_time" json:"balance"`
+	Balance   int64     `faker:"oneof:1,2" json:"balance"`
 	Currency  string    `faker:"currency" json:"currency"`
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -25,17 +25,17 @@ type Entry struct {
 }
 
 type Transfer struct {
-	ID            int64 `json:"id"`
-	FromAccountID int64 `json:"from_account_id"`
-	ToAccountID   int64 `json:"to_account_id"`
+	ID            int64 `faker:"oneof:15,27,61" json:"id"`
+	FromAccountID int64 `faker:"oneof:15,27,61" json:"from_account_id"`
+	ToAccountID   int64 `faker:"oneof:15,27,61" json:"to_account_id"`
 	// must be positive
-	Amount    int64     `json:"amount"`
+	Amount    int64     `faker:"oneof:1,2" json:"amount"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
 type User struct {
 	Username          string    `faker:"username" json:"username"`
-	HashedPassword    string    `faker:"password,len=6" json:"hashed_password"`
+	HashedPassword    string    `faker:"password" json:"hashed_password"`
 	FullName          string    `faker:"name" json:"full_name"`
 	Email             string    `faker:"email" json:"email"`
 	PasswordChangedAt time.Time `json:"password_changed_at"`

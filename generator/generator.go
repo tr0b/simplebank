@@ -11,14 +11,25 @@ type Secret struct {
 	Phrase string
 }
 
-func GenerateAccount() (db.Account, error) {
+func GenerateAccount(currency string) (db.Account, error) {
 	a := db.Account{}
 	err := faker.FakeData(&a)
+	a.Currency = currency
 	if err != nil {
 		return a, err
 	}
 
 	return a, nil
+}
+
+func GenerateTransfer() (db.Transfer, error) {
+	t := db.Transfer{}
+	err := faker.FakeData(&t)
+	if err != nil {
+		return t, err
+	}
+
+	return t, nil
 }
 
 func GenerateUser() (db.User, error) {
