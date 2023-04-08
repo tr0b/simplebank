@@ -47,3 +47,20 @@ func TestPasetoExpiredToken(t *testing.T) {
 	require.Nil(t, payload)
 
 }
+
+func TestInvalidPasetoToken(t *testing.T) {
+	maker := createRandomMaker(t, NewPasetoMaker)
+	username := faker.Username()
+	duration := time.Minute
+
+	token, err := maker.CreateToken(username, duration)
+	require.NoError(t, err)
+
+	require.NotEmpty(t, token)
+	invalidToken := "invalid"
+
+	payload, err := maker.VerifyToken(invalidToken)
+	require.Error(t, err)
+	require.EqualError(t, err, ErrInvalidToken.Error())
+	require.Nil(t, payload)
+}
