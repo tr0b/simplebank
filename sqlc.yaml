@@ -19,7 +19,7 @@ sql:
           - column: accounts.owner
             go_struct_tag: faker:"first_name"
           - column: accounts.balance
-            go_struct_tag: faker:"unix_time"
+            go_struct_tag: faker:"oneof:1,2"
           - column: accounts.currency
             go_struct_tag: faker:"currency"
           # Custom User table tags
@@ -31,3 +31,12 @@ sql:
             go_struct_tag: faker:"email"
           - column: users.full_name
             go_struct_tag: faker:"name"
+          # Custom Transfer table tags
+          - column: transfers.id
+            go_struct_tag: faker:"oneof:15,27,61"
+          - column: transfers.from_account_id
+            go_struct_tag: faker:"oneof:15,27,61"
+          - column: transfers.to_account_id
+            go_struct_tag: faker:"oneof:15,27,61"
+          - column: transfers.amount
+            go_struct_tag: faker:"oneof:1,2"
