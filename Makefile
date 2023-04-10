@@ -6,13 +6,13 @@ createdb:
 dropdb:
 	docker-compose exec postgres dropdb ${POSTGRES_DB}
 migrateup1:
-	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose up 1
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_SERVER_ADDRESS}:${POSTGRES_PORT}/${POSTGRES_DB}" -verbose up 1
 migratedown1:
-	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose down 1
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_SERVER_ADDRESS}:${POSTGRES_PORT}/${POSTGRES_DB}" -verbose down 1
 migrateup:
-	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose up
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_SERVER_ADDRESS}:${POSTGRES_PORT}/${POSTGRES_DB}" -verbose up
 migratedown:
-	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=${SSL_MODE}" -verbose down
+	migrate -path db/migrate -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_SERVER_ADDRESS}:${POSTGRES_PORT}/${POSTGRES_DB}" -verbose down
 sqlc:
 	sqlc generate
 test:
